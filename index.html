@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+
+  <script type="text/javascript" src="lib/p5.min.js"></script>
+  <script type="text/javascript" src="lib/p5.dom.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="style.css">
+
+
+</head>
+<body>
+  <div class="menustuff">
+<div class="">
+
+  <h3>1. Choose an image</h3>
+<div id="menuContainer"></div>
+<input type="file" name="" value="" id="fileButton" accept="image/*">
+
+</div>
+
+<div class="">
+
+  <h3>2. Choose ink colors</h3>
+
+  <div class="">
+
+  <p>Ink for <span style="color: red">red</span> channel</p>
+<select name="colors" id="red" onchange="changeRed()">
+  <option value="0" >yellow</option>
+  <option value="1" >pink</option>
+  <option value="2">green</option>
+  <option value="3" selected="selected">blue</option>
+  <option value="4">red</option>
+  <option value="5">black</option>
+  <option value="6">none</option>
+</select>
+
+
+
+<p>Ink for <span style="color: green">green</span> channel</p> <select name="colors" id="green" onchange="changeGreen()">
+  <option value="0" >yellow</option>
+  <option value="1" selected="selected">pink</option>
+  <option value="2">green</option>
+  <option value="3">blue</option>
+  <option value="4">red</option>
+  <option value="5">black</option>
+  <option value="6">none</option>
+</select>
+
+<p>Ink for <span style="color: blue">blue</span> channel</p>
+<select name="colors" id="blue" onchange="changeBlue()">
+  <option value="0" selected="selected">yellow</option>
+  <option value="1">pink</option>
+  <option value="2" >green</option>
+  <option value="3">blue</option>
+  <option value="4">red</option>
+  <option value="5">black</option>
+  <option value="6">none</option>
+</select>
+
+</div>
+</div>
+
+<div class="">
+
+<h3>3. Choose Layer Treatment</h3>
+
+<select name="colors" id="treatment" onchange="treatment()">
+  <option value="0">Invert</option>
+  <option value="1">Inverse Sine Curve</option>
+  <option value="2" selected="selected">None</option>
+  <option value="3">Sine Curve</option>
+  <option value="4">S-Curve (More Contrast)</option>
+</select>
+
+
+</div>
+
+<!-- <div class="">
+
+<h3>3. Scale</h3>
+
+<select name="colors" id="imgScale" onchange="setScale()">
+  <option value="0.25">0.25</option>
+  <option value="0.5"selected="selected" >0.5</option>
+  <option value="0.75" >0.75</option>
+  <option value="1">1</option>
+</select>
+
+</div> -->
+
+<div class="">
+
+  <h3>4. Process image</h3>
+
+<button type="button" name="button" onclick="process()" disabled id="processBtn"> Process</button>
+<button type="button" name="button" onclick="downloadFiles()" disabled id="dlBtn"> Download</button>
+
+
+</div>
+<p id="textContainer"></p>
+</div>
+
+<!-- <a href="info.html"
+   onclick="window.open(this.href,'targetWindow',
+                                   `toolbar=no,
+                                    location=no,
+                                    status=no,
+                                    menubar=no,
+                                    scrollbars=yes,
+                                    resizable=yes,
+                                    width=500,
+                                    height=500`);
+ return false;">Info</a> -->
+
+
+
+
+  <div id="mainWrapper">
+    <div class="cardleft" id="cardl">
+      <img alt="" class="digimg" id="digimg" onload="imgLoaded()">
+    </div>
+
+    <div class="card" id="card">
+      <div class="image first" id="layer0">
+        <div class="image second blending" id="layer1">
+          <div class="image third blending" id="layer2">
+            <div class="image fourth blending" id="layer3">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <script type="text/javascript" src="script.js"></script>
+  <!-- <script type="text/javascript" src="threedee.js"></script> -->
+
+</body>
+</html>

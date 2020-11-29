@@ -1,0 +1,136 @@
+*,
+*:before,
+*:after{
+  box-sizing: border-box;
+}
+
+body{
+  background-color: lightgrey;
+  margin: 1rem;
+}
+
+
+#mainWrapper{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 20px;
+
+  width: 100%;
+  /* height: 100vh; */
+}
+
+#mycanvas{
+  visibility: hidden;
+  position: fixed;
+  top:0;
+  margin-left:100%;
+}
+
+
+
+.card{
+  /* width: 35vw;
+  height: 75vh; */
+  /* border: solid 30px black; */
+  /* background-blend-mode: multiply; */
+  cursor: crosshair;
+  position:relative;
+  z-index: 1;
+
+  /* perspective: 500px; */
+}
+
+.cardleft{
+  /* width: 40%; */
+
+}
+
+
+
+.image{
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotateX(30deg);
+  transform: perspective(1000px) rotateX(30deg) rotateY(30deg);
+}
+
+.digimg{
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+
+}
+
+.image.first{
+/* transform-style: preserve-3d; */
+  transform: translateZ(0px);
+
+  z-index: 1;
+}
+
+.white{
+    background-color: white;
+}
+
+
+.border{
+    border: 10px solid white;
+}
+
+.image.second{
+/* transform-style: preserve-3d; */
+  transform: translateZ(60px);
+  z-index: 2;
+
+}
+
+#mycanvas{
+  /* display: none; */
+
+}
+
+.image.third{
+
+/* transform-style: preserve-3d; */
+
+  transform: translateZ(60px);
+  z-index: 3;
+
+}
+
+.image.fourth{
+/* transform-style: preserve-3d; */
+  transform: translateZ(60px);
+  z-index: 4;
+
+}
+
+.blending{
+  mix-blend-mode: multiply;
+}
+
+
+p{
+  display: inline-block;
+  font-family: sans-serif;
+  margin-top: 0;
+}
+
+select{
+  display: inline-block;
+}
+
+h3{
+  font-family: sans-serif;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.menustuff{
+  margin-bottom: 1rem;
+}
