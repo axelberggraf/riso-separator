@@ -9,7 +9,8 @@ let redInk, blueInk, greenInk;
 let colors = [];
 let colorNames = [];
 let rIndex, gIndex, bIndex;
-
+let effectAmount = 0.5;
+let imageName = "image";
 let functions = [];
 let fIndex = 2;
 
@@ -170,9 +171,8 @@ function getColors(){
   image(img,width/2,height/2,img.width*scale,img.height*scale);
   bperiod = Math.random()*10 + 5
   loadPixels();
-  // let d = pixelDensity();
+
   for (let i = 0; i < pixels.length; i+=4) {
-    // pixelValue = ((sin(((pixels[i+2]/255)*period*15-PI/2))+1)/2)
     pixelValue = functions[fIndex](pixels[i+2],bperiod,255);
     pixels[i] = red(blueInk)
     pixels[i+1] = green(blueInk)
@@ -196,10 +196,6 @@ function getColors(){
   document.getElementById('layer0').classList.add("white")
 
   dlButton.disabled = false;
-
-  // clear();
-
-
 }
 
 
@@ -214,7 +210,7 @@ function getColors(){
 //treatment (re-mapping) functions
 
 function sineCurve(x,period,normal){
-  return ((sin(((x/normal)*period-PI/2))+1)/2)
+  return ((sin(((x/normal)*period*(effectAmount+0.25)-PI/2))+1)/2)
 }
 
 function noCurve(x,period,normal){
@@ -226,7 +222,7 @@ function invCurve(x,period,normal){
 }
 
 function invSineCurve(x,period,normal){
-  return (1 - ((sin(((x/normal)*period-PI/2))+1)/2))
+  return (1 - ((sin(((x/normal)*period*(effectAmount+0.25)-PI/2))+1)/2))
 }
 
 function sCurve2(x,period,normal){
@@ -234,7 +230,7 @@ function sCurve2(x,period,normal){
   var epsilon = 0.00001;
   var min_param_a = 0.0 + epsilon;
   var max_param_a = 1.0 - epsilon;
-  var a = 0.7;
+  var a = effectAmount;
   a = Math.min(max_param_a, Math.max(min_param_a, a));
   a = 1.0-a; // for sensible results
 
@@ -247,6 +243,18 @@ function sCurve2(x,period,normal){
   return 1 - y;
 }
 
+
+
+//effect amount
+var slider = document.getElementById("slider");
+
+slider.oninput = function() {
+
+
+  effectAmount = parseFloat(this.value,10) / 100;
+
+
+}
 
 
 //Change ink for red channel
@@ -276,6 +284,11 @@ function changeBlue() {
 //Change treatment
 function treatment() {
   var val = parseInt(document.getElementById("treatment").value);
+  if (val == 2 || val == 0){
+    slider.disabled = true;
+  }else{
+    slider.disabled = false;
+  }
   fIndex = val;
 }
 
@@ -300,7 +313,6 @@ function process(){
 //download function (downloads in original scale)
 function downloadFiles(){
   scale = 1;
-  textContainer.innerHTML = "Processing download. Your files are ready in a second."
   canvas.size(img.width*scale,img.height*scale);
 
   //red
@@ -321,12 +333,7 @@ function downloadFiles(){
 
   var cs = document.getElementById('mycanvas'),
   dataUrl = cs.toDataURL();
-  saveCanvas(canvas, colorNames[rIndex], 'jpg');
-
-
-  // var layer1 = document.getElementById('layer1')
-  // layer1.style.backgroundImage = "url(" + dataUrl +")";
-
+  saveCanvas(canvas, imageName + "_" + colorNames[rIndex], 'jpg');
 
 
 
@@ -347,7 +354,7 @@ function downloadFiles(){
 
   let string = colorNames[gIndex]
   dataUrl = cs.toDataURL();
-  saveCanvas(canvas, string, 'jpg');
+  saveCanvas(canvas, imageName + "_" + string, 'jpg');
 
 
 
@@ -357,9 +364,7 @@ function downloadFiles(){
   image(img,width/2,height/2,img.width*scale,img.height*scale);
 
   loadPixels();
-  // let d = pixelDensity();
   for (let i = 0; i < pixels.length; i+=4) {
-    // pixelValue = ((sin(((pixels[i+2]/255)*period*15-PI/2))+1)/2)
     pixelValue = functions[fIndex](pixels[i+2],bperiod,255);
     pixels[i] = 255-pixelValue*255;
     pixels[i+1] = 255-pixelValue*255;
@@ -370,8 +375,7 @@ function downloadFiles(){
   updatePixels();
 
   dataUrl = cs.toDataURL();
-  saveCanvas(canvas, colorNames[bIndex], 'jpg');
-  textContainer.innerHTML = ""
+  saveCanvas(canvas, imageName + "_" +  colorNames[bIndex], 'jpg');
 
 
 }
@@ -383,6 +387,10 @@ function downloadFiles(){
 fileButton.addEventListener('change',function(e){
   file = e.target.files[0];
     document.getElementById('digimg').src = URL.createObjectURL(event.target.files[0]);
+    if(event.target.files[0].name.split('.').slice(0, -1).join('.')){
+        imageName = event.target.files[0].name.split('.').slice(0, -1).join('.');
+      }
+    console.log(imageName)
     // img = loadImage()
     document.getElementById('digimg').classList.add('border')
 

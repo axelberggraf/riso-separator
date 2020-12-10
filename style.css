@@ -7,6 +7,7 @@
 body{
   background-color: lightgrey;
   margin: 1rem;
+  margin-top: 0.3rem;
 }
 
 
@@ -119,6 +120,7 @@ p{
   display: inline-block;
   font-family: sans-serif;
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 select{
@@ -133,4 +135,34 @@ h3{
 
 .menustuff{
   margin-bottom: 1rem;
+  display: inline-block;
+  width: 90%;
+}
+
+a{
+
+  color: black;
+}
+a:hover{
+  color: grey;
+}
+
+.info{
+  display: inline-block;
+  vertical-align:top;
+  width: 8%;
+  text-align: right;
+}
+
+footer{
+  width: 100%;
+  position: fixed;
+  bottom: 0.5rem;
+  z-index: 10;
+}
+
+footer p{
+  font-size: 10px;
+  width: 100%;
+  text-align: center;
 }

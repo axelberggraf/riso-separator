@@ -74,14 +74,20 @@
 
 <select name="colors" id="treatment" onchange="treatment()">
   <option value="0">Invert</option>
-  <option value="1">Inverse Sine Curve</option>
+  <option value="1">Color Magic™ Inverse</option>
   <option value="2" selected="selected">None</option>
-  <option value="3">Sine Curve</option>
-  <option value="4">S-Curve (More Contrast)</option>
+  <option value="3">Color Magic™</option>
+  <option value="4">S-Curve (Contrast)</option>
 </select>
+<p> &nbsp; &nbsp; Effect amount:</p>
+<input type="range" min="1" max="100" value="50" id="slider" disabled>
 
 
 </div>
+
+
+
+
 
 <!-- <div class="">
 
@@ -105,23 +111,28 @@
 
 
 </div>
-<p id="textContainer"></p>
+
 </div>
 
-<!-- <a href="info.html"
-   onclick="window.open(this.href,'targetWindow',
-                                   `toolbar=no,
-                                    location=no,
-                                    status=no,
-                                    menubar=no,
-                                    scrollbars=yes,
-                                    resizable=yes,
-                                    width=500,
-                                    height=500`);
- return false;">Info</a> -->
 
+<div class="info">
+  <h3>
+ <a href="info.html"
+    onclick="window.open(this.href,'targetWindow',
+                                    `toolbar=no,
+                                     location=no,
+                                     status=no,
+                                     menubar=no,
+                                     scrollbars=yes,
+                                     resizable=yes,
+                                     width=500,
+                                     height=500`);
+  return false;">Info</a>
 
+</h3>
+ </div>
 
+ </div>
 
   <div id="mainWrapper">
     <div class="cardleft" id="cardl">
@@ -143,6 +154,12 @@
   </div>
 
 
+
+<footer>
+  <p>
+  This tool was made by <a href="https://instagram.com/berg.graf">Axel Berggraf Egenæs</a>. If you have questions or suggestions don't hesitate to <a href="mailto:axel@egenaes.no">contact</a> me.
+</p>
+</footer>
   <script type="text/javascript" src="script.js"></script>
   <!-- <script type="text/javascript" src="threedee.js"></script> -->
 
