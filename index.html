@@ -1,167 +1,287 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <title></title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Riso Separation Tool | Backend Books</title>
 
+    <script type="text/javascript" src="lib/p5.min.js"></script>
+    <script type="text/javascript" src="lib/p5.dom.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="init.js" defer></script>
+    <script type="text/javascript" src="script.js" defer></script>
+    <script type="text/javascript" src="layers.js" defer></script>
+    <link href="lib/nice-select2.css" rel="stylesheet" />
+    <script src="lib/nice-select2.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script type="text/javascript" src="lib/p5.min.js"></script>
-  <script type="text/javascript" src="lib/p5.dom.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/eun0pqk.css" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favicon.png" />
+  </head>
+  <body>
+    <div class="gridWrapper">
+      <div class="menustuff">
+        <div class="cardleft" id="cardl">
+          <img alt="" class="digimg" id="digimg" onload="imgLoaded()" />
+          <label for="fileButton" class="custom-file-upload" id="labelForFile">
+            <h3>+ Choose a file</h3>
+          </label>
+          <input
+            type="file"
+            name="file-upload"
+            value=""
+            id="fileButton"
+            accept="image/*"
+          />
+        </div>
 
-  <link rel="stylesheet" href="style.css">
+        <h3>Choose ink colors</h3>
+        <div class="colors">
+          <p><span style="color: red;">Red</span> channel:</p>
+          <select
+            name="colors"
+            id="red"
+            class="special-select red"
+            onchange="changeRed()"
+          >
+            <option value="0">Yellow</option>
+            <option value="1">Fluo Pink</option>
+            <option value="2">Green</option>
+            <option value="3" selected="selected">Blue</option>
+            <option value="4">Red</option>
+            <option value="5">Black</option>
+            <option value="6">Fluo Orange</option>
+            <option value="7">Fluo Green</option>
+            <option value="8">Light Grey</option>
+            <option value="9">Md. Blue</option>
+            <option value="10">Teal</option>
+            <option value="11">Aqua</option>
+            <option value="12">Purple</option>
+            <option value="13">None</option>
+          </select>
+          <p><span style="color: green;">Green</span> channel:</p>
+          <select
+            name="colors"
+            id="green"
+            class="special-select green"
+            onchange="changeGreen()"
+          >
+            <option value="0">Yellow</option>
+            <option value="1" selected="selected">Fluo Pink</option>
+            <option value="2">Green</option>
+            <option value="3">Blue</option>
+            <option value="4">Red</option>
+            <option value="5">Black</option>
+            <option value="6">Fluo Orange</option>
+            <option value="7">Fluo Green</option>
+            <option value="8">Light Grey</option>
+            <option value="9">Md. Blue</option>
+            <option value="10">Teal</option>
+            <option value="11">Aqua</option>
+            <option value="12">Purple</option>
+            <option value="13">None</option>
+          </select>
+          <p><span style="color: blue;">Blue</span> channel:</p>
+          <select
+            name="colors"
+            id="blue"
+            class="special-select blue"
+            onchange="changeBlue()"
+          >
+            <option value="0" selected="selected">Yellow</option>
+            <option value="1">Fluo Pink</option>
+            <option value="2">Green</option>
+            <option value="3">Blue</option>
+            <option value="4">Red</option>
+            <option value="5">Black</option>
+            <option value="6">Fluo Orange</option>
+            <option value="7">Fluo Green</option>
+            <option value="8">Light Grey</option>
+            <option value="9">Md. Blue</option>
+            <option value="10">Teal</option>
+            <option value="11">Aqua</option>
+            <option value="12">Purple</option>
+            <option value="13">None</option>
+          </select>
+        </div>
+        <h3>Choose layer treatment</h3>
 
+        <select
+          name="colors"
+          id="treatment"
+          class="select-target"
+          onchange="treatment()"
+        >
+          <option value="2" selected="selected">None</option>
+          <option value="3">Crazy Curves™</option>
+          <option value="1">Crazy Curves™ Inverse</option>
+          <option value="4">S-Curve (Contrast)</option>
+          <option value="0">Invert</option>
+          <option value="5">Threshold</option>
+        </select>
+        <br />
+        <h4>Amount:</h4>
+        <input type="range" min="1" max="100" value="50" id="slider" disabled />
 
-</head>
-<body>
-  <div class="menustuff">
-<div class="">
+        <h3>Process image</h3>
 
-  <h3>1. Choose an image</h3>
-<div id="menuContainer"></div>
-<input type="file" name="" value="" id="fileButton" accept="image/*">
+        <button
+          class="button process"
+          type="button"
+          name="button"
+          onclick="process()"
+          disabled
+          id="processBtn"
+        >
+          <h3>
+            <svg x="0px" y="0px" viewBox="0 0 12.6 12.3">
+              <g>
+                <path
+                  d="M12.3,8.2l0.2-1c0.1-0.5-0.2-1-0.7-1.2l-1-0.3c0,0-0.1,0-0.1-0.1c0-0.2-0.1-0.5-0.2-0.7c0,0,0-0.1,0-0.1l0.7-0.7
+		c0.4-0.4,0.4-0.9,0.1-1.3L10.9,2C10.6,1.6,10,1.5,9.6,1.8L8.7,2.3c0,0-0.1,0-0.1,0C8.4,2.2,8.2,2.1,7.9,2c0,0-0.1-0.1-0.1-0.1
+		l-0.1-1C7.7,0.4,7.3,0,6.8,0h-1c-0.5,0-0.9,0.4-1,0.9l-0.1,1c0,0,0,0.1-0.1,0.1C4.4,2.1,4.2,2.2,4,2.3c0,0-0.1,0-0.1,0L3,1.8
+		C2.5,1.5,2,1.6,1.7,2L1,2.8c-0.3,0.4-0.3,1,0.1,1.3l0.7,0.7c0,0,0,0.1,0,0.1C1.8,5.1,1.7,5.4,1.7,5.6c0,0,0,0.1-0.1,0.1L0.7,6
+		C0.2,6.2-0.1,6.7,0,7.2l0.2,1C0.4,8.7,0.8,9,1.3,9l1-0.1c0.1,0,0.1,0,0.1,0c0.1,0.2,0.3,0.4,0.4,0.6c0,0,0,0.1,0,0.1l-0.3,1
+		c-0.2,0.5,0,1,0.5,1.2L4,12.2c0.4,0.2,1,0.1,1.3-0.4L5.8,11c0,0,0.1-0.1,0.1-0.1c0.2,0,0.5,0,0.7,0c0,0,0.1,0,0.1,0.1l0.5,0.9
+		c0.2,0.3,0.5,0.5,0.8,0.5c0.1,0,0.3,0,0.4-0.1l0.9-0.4c0.4-0.2,0.7-0.8,0.5-1.2l-0.3-1c0,0,0-0.1,0-0.1c0.2-0.2,0.3-0.4,0.4-0.6
+		c0,0,0.1-0.1,0.1-0.1l1,0.1C11.7,9,12.2,8.7,12.3,8.2z M11.5,8c0,0.1-0.1,0.1-0.1,0.1l-1-0.1c0,0-0.1,0-0.1,0
+		C9.9,8,9.6,8.1,9.4,8.4C9.3,8.6,9.2,8.8,9,8.9c-0.2,0.3-0.3,0.7-0.2,1l0.3,1c0,0.1,0,0.1-0.1,0.1l-0.9,0.4c-0.1,0-0.1,0-0.2,0
+		l-0.5-0.9c-0.2-0.3-0.6-0.5-1-0.5c-0.2,0-0.4,0-0.5,0c-0.4,0-0.8,0.1-1,0.5l-0.5,0.9c0,0.1-0.1,0.1-0.2,0L3.5,11
+		c-0.1,0-0.1-0.1-0.1-0.1l0.3-1c0.1-0.3,0-0.7-0.2-1C3.4,8.7,3.2,8.6,3.1,8.4C2.9,8.1,2.6,7.9,2.2,8l-1,0.1c-0.1,0-0.1,0-0.1-0.1
+		L0.8,7c0-0.1,0-0.1,0.1-0.1l1-0.3c0.3-0.1,0.6-0.4,0.7-0.8c0-0.2,0.1-0.4,0.1-0.6c0.1-0.3,0-0.7-0.2-1L1.7,3.5c0,0,0-0.1,0-0.2
+		l0.6-0.8c0,0,0.1-0.1,0.2,0l0.9,0.5c0.3,0.2,0.7,0.2,1,0C4.5,3,4.7,2.9,4.9,2.8C5.3,2.7,5.5,2.4,5.6,2l0.1-1c0-0.1,0.1-0.1,0.1-0.1
+		h1c0.1,0,0.1,0,0.1,0.1L7,2c0,0.4,0.3,0.7,0.6,0.8C7.9,2.9,8.1,3,8.2,3.1c0.3,0.2,0.7,0.2,1,0l0.9-0.5c0.1,0,0.1,0,0.2,0l0.6,0.8
+		c0,0,0,0.1,0,0.2l-0.8,0.7c-0.3,0.3-0.4,0.6-0.2,1C9.9,5.4,10,5.6,10,5.8c0.1,0.4,0.3,0.7,0.7,0.8l1,0.3c0.1,0,0.1,0.1,0.1,0.1
+		L11.5,8z"
+                />
+                <path
+                  d="M6.3,3.8c-1.4,0-2.5,1.1-2.5,2.5s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5C8.8,4.9,7.7,3.8,6.3,3.8z M6.3,8C5.4,8,4.6,7.2,4.6,6.3
+		s0.8-1.7,1.7-1.7S8,5.4,8,6.3C8,7.2,7.2,8,6.3,8z"
+                />
+              </g>
+            </svg>
 
-</div>
+            Process
+          </h3>
+        </button>
+        <button
+          class="button"
+          type="button"
+          name="button"
+          onclick="downloadComposite()"
+          disabled
+          id="dlBtn-comp"
+        >
+          <h3>
+            <svg x="0px" y="0px" viewBox="0 0 7.8 10.7">
+              <path
+                d="M0,0v10.7h7.8V0H0z M6.8,1v3.6L5.8,3.6l-2,2L2.5,4.3L1,5.7V1H6.8z M4.5,6.3L5.8,5L6.8,6v2.6L4.5,6.3z M1,7.1l1.5-1.5l4,4H1
+  V7.1z"
+              />
+            </svg>
 
-<div class="">
+            Download image
+          </h3>
+        </button>
+        <button
+          class="button"
+          type="button"
+          name="button"
+          onclick="downloadFiles()"
+          disabled
+          id="dlBtn"
+        >
+          <h3>
+            <svg x="0px" y="0px" viewBox="0 0 8.3 10.8">
+              <g>
+                <rect y="9.8" width="8.3" height="1" />
+                <polygon
+                  points="8.2,5.1 7.5,4.4 4.6,7.5 4.6,0 3.6,0 3.6,7.5 0.8,4.4 0,5.1 4.1,9.5 	"
+                />
+              </g>
+            </svg>
+            Download layers
+          </h3>
+        </button>
 
-  <h3>2. Choose ink colors</h3>
+        <p class="footer">
+          This tool was made by
+          <a href="https://instagram.com/berg.graf">Axel Berggraf Egenæs</a>. If
+          you have questions or suggestions don't hesitate to
+          <a href="mailto:axel@egenaes.no">contact</a> me.
+        </p>
+      </div>
 
-  <div class="">
-
-  <p>Ink for <span style="color: red">red</span> channel</p>
-<select name="colors" id="red" onchange="changeRed()">
-  <option value="0" >yellow</option>
-  <option value="1" >pink</option>
-  <option value="2">green</option>
-  <option value="3" selected="selected">blue</option>
-  <option value="4">red</option>
-  <option value="5">black</option>
-  <option value="6">none</option>
-</select>
-
-
-
-<p>Ink for <span style="color: green">green</span> channel</p> <select name="colors" id="green" onchange="changeGreen()">
-  <option value="0" >yellow</option>
-  <option value="1" selected="selected">pink</option>
-  <option value="2">green</option>
-  <option value="3">blue</option>
-  <option value="4">red</option>
-  <option value="5">black</option>
-  <option value="6">none</option>
-</select>
-
-<p>Ink for <span style="color: blue">blue</span> channel</p>
-<select name="colors" id="blue" onchange="changeBlue()">
-  <option value="0" selected="selected">yellow</option>
-  <option value="1">pink</option>
-  <option value="2" >green</option>
-  <option value="3">blue</option>
-  <option value="4">red</option>
-  <option value="5">black</option>
-  <option value="6">none</option>
-</select>
-
-</div>
-</div>
-
-<div class="">
-
-<h3>3. Choose Layer Treatment</h3>
-
-<select name="colors" id="treatment" onchange="treatment()">
-  <option value="0">Invert</option>
-  <option value="1">Color Magic™ Inverse</option>
-  <option value="2" selected="selected">None</option>
-  <option value="3">Color Magic™</option>
-  <option value="4">S-Curve (Contrast)</option>
-</select>
-<p> &nbsp; &nbsp; Effect amount:</p>
-<input type="range" min="1" max="100" value="50" id="slider" disabled>
-
-
-</div>
-
-
-
-
-
-<!-- <div class="">
-
-<h3>3. Scale</h3>
-
-<select name="colors" id="imgScale" onchange="setScale()">
-  <option value="0.25">0.25</option>
-  <option value="0.5"selected="selected" >0.5</option>
-  <option value="0.75" >0.75</option>
-  <option value="1">1</option>
-</select>
-
-</div> -->
-
-<div class="">
-
-  <h3>4. Process image</h3>
-
-<button type="button" name="button" onclick="process()" disabled id="processBtn"> Process</button>
-<button type="button" name="button" onclick="downloadFiles()" disabled id="dlBtn"> Download</button>
-
-
-</div>
-
-</div>
-
-
-<div class="info">
-  <h3>
- <a href="info.html"
-    onclick="window.open(this.href,'targetWindow',
-                                    `toolbar=no,
-                                     location=no,
-                                     status=no,
-                                     menubar=no,
-                                     scrollbars=yes,
-                                     resizable=yes,
-                                     width=500,
-                                     height=500`);
-  return false;">Info</a>
-
-</h3>
- </div>
-
- </div>
-
-  <div id="mainWrapper">
-    <div class="cardleft" id="cardl">
-      <img alt="" class="digimg" id="digimg" onload="imgLoaded()">
-    </div>
-
-    <div class="card" id="card">
-      <div class="image first" id="layer0">
-        <div class="image second blending" id="layer1">
-          <div class="image third blending" id="layer2">
-            <div class="image fourth blending" id="layer3">
+      <div id="mainWrapper">
+        <div class="card" id="card">
+          <div class="image first" id="layer0">
+            <div class="image second blending" id="layer1">
+              <div class="image third blending" id="layer2">
+                <div class="image fourth blending" id="layer3"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <div class="layers">
+      <p class="show-info">Show/hide:</p>
+      <label class="container">
+        R
+        <input
+          type="checkbox"
+          name="red"
+          id="redLayer"
+          onclick="hideRed()"
+          value=""
+          checked
+        />
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">
+        G
+        <input
+          type="checkbox"
+          name="green"
+          id="greenLayer"
+          onclick="hideGreen()"
+          value=""
+          checked
+        />
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">
+        B
+        <input
+          type="checkbox"
+          name="value"
+          id="blueLayer"
+          onclick="hideBlue()"
+          value=""
+          checked
+        />
+        <span class="checkmark"></span>
+      </label>
+      <button
+        class="button ui"
+        onclick="enablePerspective()"
+        id="perspectiveButton"
+        disabled
+      >
+        <h4>3D</h4>
+      </button>
+    </div>
+    <!-- <footer>
+      <p>
+        This tool was made by
+        <a href="https://instagram.com/berg.graf">Axel Berggraf Egenæs</a>. If
+        you have questions or suggestions don't hesitate to
+        <a href="mailto:axel@egenaes.no">contact</a> me.
+      </p>
+    </footer> -->
 
-  </div>
-
-
-
-<footer>
-  <p>
-  This tool was made by <a href="https://instagram.com/berg.graf">Axel Berggraf Egenæs</a>. If you have questions or suggestions don't hesitate to <a href="mailto:axel@egenaes.no">contact</a> me.
-</p>
-</footer>
-  <script type="text/javascript" src="script.js"></script>
-  <!-- <script type="text/javascript" src="threedee.js"></script> -->
-
-</body>
+    <!-- <script type="text/javascript" src="threedee.js"></script> -->
+  </body>
 </html>
