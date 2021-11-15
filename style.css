@@ -354,6 +354,8 @@ a {
 .footer {
   margin-top: 30px;
   font-size: 12px;
+  border-top: 1px solid lightgrey;
+  padding-top: 30px;
 }
 
 .ui {
@@ -389,7 +391,7 @@ a {
   height: 4px;
   border-bottom: 1px solid grey;
   border-left: 1px solid grey;
-  transform: translateY(-3px) translateX(2px) rotate(-45deg);
+  transform: translateY(-4px) translateX(2px) rotate(-45deg);
   display: inline-block;
   margin-right: 4px;
 }
