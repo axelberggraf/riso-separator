@@ -38,7 +38,10 @@
 
         <h3>Choose ink colors</h3>
         <div class="colors">
-          <p><span style="color: red;">Red</span> channel:</p>
+          <div onclick="hideOpacity(this)" class="parent">
+            <div class="drop"></div>
+            <p><span style="color: red;">Red</span> channel:</p>
+          </div>
           <select
             name="colors"
             id="red"
@@ -60,7 +63,19 @@
             <option value="12">Purple</option>
             <option value="13">None</option>
           </select>
-          <p><span style="color: green;">Green</span> channel:</p>
+          <h4 class="meta hidden">Opacity:</h4>
+          <input
+            class="meta hidden"
+            type="range"
+            min="1"
+            max="100"
+            value="100"
+            id="redSlider"
+          />
+          <div onclick="hideOpacity(this)" class="parent">
+            <div class="drop"></div>
+            <p><span style="color: green;">Green</span> channel:</p>
+          </div>
           <select
             name="colors"
             id="green"
@@ -82,7 +97,20 @@
             <option value="12">Purple</option>
             <option value="13">None</option>
           </select>
-          <p><span style="color: blue;">Blue</span> channel:</p>
+          <h4 class="meta hidden">Opacity:</h4>
+
+          <input
+            class="meta hidden"
+            type="range"
+            min="1"
+            max="100"
+            value="100"
+            id="greenSlider"
+          />
+          <div onclick="hideOpacity(this)" class="parent">
+            <div class="drop"></div>
+            <p><span style="color: blue;">Blue</span> channel:</p>
+          </div>
           <select
             name="colors"
             id="blue"
@@ -104,6 +132,16 @@
             <option value="12">Purple</option>
             <option value="13">None</option>
           </select>
+          <h4 class="meta hidden">Opacity:</h4>
+
+          <input
+            class="meta hidden"
+            type="range"
+            min="1"
+            max="100"
+            value="100"
+            id="blueSlider"
+          />
         </div>
         <h3>Choose layer treatment</h3>
 
