@@ -33,6 +33,9 @@ var dlButton2 = document.getElementById("dlBtn-comp");
 let canvas2 = document.createElement("canvas");
 let ctx2 = canvas2.getContext("2d");
 var processButton = document.getElementById("processBtn");
+let redOpacity = 1;
+let blueOpacity = 1;
+let greenOpacity = 1;
 
 var url;
 
@@ -143,7 +146,7 @@ function getColors() {
       pixels[i] = red(redInk);
       pixels[i + 1] = green(redInk);
       pixels[i + 2] = blue(redInk);
-      pixels[i + 3] = pixelValue * 255;
+      pixels[i + 3] = pixelValue * 255 * redOpacity;
     }
     updatePixels();
 
@@ -172,7 +175,7 @@ function getColors() {
       pixels[i] = red(greenInk);
       pixels[i + 1] = green(greenInk);
       pixels[i + 2] = blue(greenInk);
-      pixels[i + 3] = pixelValue * 255;
+      pixels[i + 3] = pixelValue * 255 * greenOpacity;
     }
     updatePixels();
 
@@ -198,7 +201,7 @@ function getColors() {
       pixels[i] = red(blueInk);
       pixels[i + 1] = green(blueInk);
       pixels[i + 2] = blue(blueInk);
-      pixels[i + 3] = pixelValue * 255;
+      pixels[i + 3] = pixelValue * 255 * blueOpacity;
     }
     updatePixels();
 
@@ -278,11 +281,25 @@ function sCurve2(x, period, normal) {
 }
 
 //effect amount
-var slider = document.getElementById("slider");
+const slider = document.getElementById("slider");
 
 slider.oninput = function () {
   effectAmount = parseFloat(this.value, 10) / 100;
   console.log(effectAmount);
+};
+
+const redSlider = document.getElementById("redSlider");
+redSlider.oninput = function () {
+  redOpacity = parseFloat(this.value, 10) / 100;
+};
+const greenSlider = document.getElementById("greenSlider");
+greenSlider.oninput = function () {
+  greenOpacity = parseFloat(this.value, 10) / 100;
+};
+
+const blueSlider = document.getElementById("blueSlider");
+blueSlider.oninput = function () {
+  blueOpacity = parseFloat(this.value, 10) / 100;
 };
 
 //Change ink for red channel
@@ -369,9 +386,9 @@ function downloadFiles() {
   loadPixels();
   for (let i = 0; i < pixels.length; i += 4) {
     pixelValue = functions[fIndex](pixels[i], rperiod, 255);
-    pixels[i] = 255 - pixelValue * 255;
-    pixels[i + 1] = 255 - pixelValue * 255;
-    pixels[i + 2] = 255 - pixelValue * 255;
+    pixels[i] = 255 - pixelValue * 255 * redOpacity;
+    pixels[i + 1] = 255 - pixelValue * 255 * redOpacity;
+    pixels[i + 2] = 255 - pixelValue * 255 * redOpacity;
     pixels[i + 3] = 255;
   }
   updatePixels();
@@ -390,9 +407,9 @@ function downloadFiles() {
   loadPixels();
   for (let i = 0; i < pixels.length; i += 4) {
     pixelValue = functions[fIndex](pixels[i + 1], gperiod, 255);
-    pixels[i] = 255 - pixelValue * 255;
-    pixels[i + 1] = 255 - pixelValue * 255;
-    pixels[i + 2] = 255 - pixelValue * 255;
+    pixels[i] = 255 - pixelValue * 255 * greenOpacity;
+    pixels[i + 1] = 255 - pixelValue * 255 * greenOpacity;
+    pixels[i + 2] = 255 - pixelValue * 255 * greenOpacity;
     pixels[i + 3] = 255;
   }
   updatePixels();
@@ -409,9 +426,9 @@ function downloadFiles() {
   for (let i = 0; i < pixels.length; i += 4) {
     // pixelValue = ((sin(((pixels[i+2]/255)*period*15-PI/2))+1)/2)
     pixelValue = functions[fIndex](pixels[i + 2], bperiod, 255);
-    pixels[i] = 255 - pixelValue * 255;
-    pixels[i + 1] = 255 - pixelValue * 255;
-    pixels[i + 2] = 255 - pixelValue * 255;
+    pixels[i] = 255 - pixelValue * 255 * blueOpacity;
+    pixels[i + 1] = 255 - pixelValue * 255 * blueOpacity;
+    pixels[i + 2] = 255 - pixelValue * 255 * blueOpacity;
     pixels[i + 3] = 255;
   }
   updatePixels();
@@ -440,7 +457,7 @@ function downloadComposite() {
       pixels[i] = red(redInk);
       pixels[i + 1] = green(redInk);
       pixels[i + 2] = blue(redInk);
-      pixels[i + 3] = pixelValue * 255;
+      pixels[i + 3] = pixelValue * 255 * redOpacity;
     }
     updatePixels();
     ctx2.globalCompositeOperation = "multiply";
@@ -460,7 +477,7 @@ function downloadComposite() {
       pixels[i] = red(greenInk);
       pixels[i + 1] = green(greenInk);
       pixels[i + 2] = blue(greenInk);
-      pixels[i + 3] = pixelValue * 255;
+      pixels[i + 3] = pixelValue * 255 * greenOpacity;
     }
     updatePixels();
     ctx2.drawImage(cs, 0, 0, canvas2.width, canvas2.height);
@@ -476,7 +493,7 @@ function downloadComposite() {
       pixels[i] = red(blueInk);
       pixels[i + 1] = green(blueInk);
       pixels[i + 2] = blue(blueInk);
-      pixels[i + 3] = pixelValue * 255;
+      pixels[i + 3] = pixelValue * 255 * blueOpacity;
     }
     updatePixels();
     ctx2.drawImage(cs, 0, 0, canvas2.width, canvas2.height);

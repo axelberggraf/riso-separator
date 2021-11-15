@@ -371,6 +371,11 @@ a {
   color: black;
 }
 
+.meta {
+  margin-top: 0;
+  display: none;
+}
+
 /* Slider */
 input[type="range"] {
   height: 25px;
