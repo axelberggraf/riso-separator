@@ -375,6 +375,28 @@ a {
   margin-top: 0;
 }
 
+.parent {
+  position: relative;
+  cursor: pointer;
+}
+
+.parent:hover .drop {
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+}
+.drop {
+  width: 4px;
+  height: 4px;
+  border-bottom: 1px solid grey;
+  border-left: 1px solid grey;
+  transform: translateY(-3px) translateX(2px) rotate(-45deg);
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.drop-open {
+  transform: translateY(-1px) translateX(2px) rotate(135deg);
+}
 /* Slider */
 input[type="range"] {
   height: 25px;
@@ -543,4 +565,8 @@ input[type="range"]:focus::-ms-fill-upper {
   font-size: 10px;
   top: 0;
   left: 12px;
+}
+
+.hidden {
+  display: none;
 }

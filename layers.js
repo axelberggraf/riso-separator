@@ -46,3 +46,13 @@ NiceSelect.bind(document.getElementById("green"), {
 NiceSelect.bind(document.getElementById("blue"), {
   searchable: false,
 });
+
+function hideOpacity(e) {
+  e.children[0].classList.toggle("drop-open");
+  e.nextElementSibling.nextElementSibling.nextElementSibling.classList.toggle(
+    "hidden"
+  );
+  e.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.classList.toggle(
+    "hidden"
+  );
+}
