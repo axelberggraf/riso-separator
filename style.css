@@ -21,10 +21,10 @@
 }
 
 html {
-  background-color: lightgrey;
+  background-color: grey;
 }
 body {
-  background-color: black;
+  background-color: grey;
 }
 html,
 body {
@@ -75,7 +75,6 @@ p {
 
   width: 75vw;
   height: 100vh;
-  background-color: black;
   position: fixed;
   left: 25vw;
   display: flex;
