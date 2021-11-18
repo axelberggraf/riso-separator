@@ -1,4 +1,7 @@
-# riso-separator
-A tool for RGB color separation.
+A tool for RGB color separation + effects.
 
-It let's you upload an image, separate the RGB channels, apply a Riso Ink color for each channel, and preview the printing results. For fun expressions, try the Color Magic™ treatment.
+www.risoseparator.tools
+
+It lets you upload an image, separate the RGB channels, apply a Riso Ink color for each channel, and preview the printing results. For fun expressions, try the Crazy Curves™ treatment.
+
+[Warning: Extremely ugly code, might redo/clean up this project in the future]

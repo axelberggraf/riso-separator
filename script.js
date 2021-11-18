@@ -397,44 +397,43 @@ function downloadFiles() {
     dataUrl = cs.toDataURL();
   saveCanvas(canvas, imageName + "_" + colorNames[rIndex], "jpg");
 
-  // var layer1 = document.getElementById('layer1')
-  // layer1.style.backgroundImage = "url(" + dataUrl +")";
+  // Slight delay to ensure all files downlaod
+  setTimeout(() => {
+    //green
+    image(img, width / 2, height / 2, img.width * scale, img.height * scale);
+    loadPixels();
+    for (let i = 0; i < pixels.length; i += 4) {
+      pixelValue = functions[fIndex](pixels[i + 1], gperiod, 255);
+      pixels[i] = 255 - pixelValue * 255 * greenOpacity;
+      pixels[i + 1] = 255 - pixelValue * 255 * greenOpacity;
+      pixels[i + 2] = 255 - pixelValue * 255 * greenOpacity;
+      pixels[i + 3] = 255;
+    }
+    updatePixels();
 
-  // green
+    let string = colorNames[gIndex];
+    dataUrl = cs.toDataURL();
+    saveCanvas(canvas, imageName + "_" + string, "jpg");
 
-  image(img, width / 2, height / 2, img.width * scale, img.height * scale);
+    // Slight delay to ensure all files downlaod
+    setTimeout(() => {
+      // blue
+      image(img, width / 2, height / 2, img.width * scale, img.height * scale);
 
-  loadPixels();
-  for (let i = 0; i < pixels.length; i += 4) {
-    pixelValue = functions[fIndex](pixels[i + 1], gperiod, 255);
-    pixels[i] = 255 - pixelValue * 255 * greenOpacity;
-    pixels[i + 1] = 255 - pixelValue * 255 * greenOpacity;
-    pixels[i + 2] = 255 - pixelValue * 255 * greenOpacity;
-    pixels[i + 3] = 255;
-  }
-  updatePixels();
+      loadPixels();
+      for (let i = 0; i < pixels.length; i += 4) {
+        pixelValue = functions[fIndex](pixels[i + 2], bperiod, 255);
+        pixels[i] = 255 - pixelValue * 255 * blueOpacity;
+        pixels[i + 1] = 255 - pixelValue * 255 * blueOpacity;
+        pixels[i + 2] = 255 - pixelValue * 255 * blueOpacity;
+        pixels[i + 3] = 255;
+      }
+      updatePixels();
 
-  let string = colorNames[gIndex];
-  dataUrl = cs.toDataURL();
-  saveCanvas(canvas, imageName + "_" + string, "jpg");
-
-  // blue
-  image(img, width / 2, height / 2, img.width * scale, img.height * scale);
-
-  loadPixels();
-  // let d = pixelDensity();
-  for (let i = 0; i < pixels.length; i += 4) {
-    // pixelValue = ((sin(((pixels[i+2]/255)*period*15-PI/2))+1)/2)
-    pixelValue = functions[fIndex](pixels[i + 2], bperiod, 255);
-    pixels[i] = 255 - pixelValue * 255 * blueOpacity;
-    pixels[i + 1] = 255 - pixelValue * 255 * blueOpacity;
-    pixels[i + 2] = 255 - pixelValue * 255 * blueOpacity;
-    pixels[i + 3] = 255;
-  }
-  updatePixels();
-
-  dataUrl = cs.toDataURL();
-  saveCanvas(canvas, imageName + "_" + colorNames[bIndex], "jpg");
+      dataUrl = cs.toDataURL();
+      saveCanvas(canvas, imageName + "_" + colorNames[bIndex], "jpg");
+    }, 200);
+  }, 200);
 }
 
 // Download composite image
