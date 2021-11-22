@@ -275,6 +275,9 @@
 .special-select li[data-value="12"] {
   color: var(--purple);
 }
+.special-select li[data-value="13"] {
+  color: var(--gold);
+}
 
 .red .current {
   color: var(--blue);

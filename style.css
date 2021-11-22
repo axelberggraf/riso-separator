@@ -12,12 +12,13 @@
   --medBlue: #3255a4;
   --orange: #ff7477;
   --lightGrey: #88898a;
-  --red: #ff665e;
+  --red: rgba(241, 80, 96);
   --fluoGreen: #44d62c;
   --purple: #765ba7;
   --teal: #00838a;
   --aqua: #5ec8e5;
   --fluoOrange: #ff7477;
+  --gold: #ac936e;
 }
 
 html {

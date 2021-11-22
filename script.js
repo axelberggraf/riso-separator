@@ -17,6 +17,7 @@ let pink,
   teal,
   aqua,
   purple,
+  gold,
   none;
 let redInk, blueInk, greenInk;
 let colors = [];
@@ -66,7 +67,7 @@ function setup() {
   yellow = color(255, 232, 0);
   risoGreen = color(0, 169, 80);
   risoBlue = color(0, 120, 191);
-  risoRed = color(255, 102, 94);
+  risoRed = color(241, 80, 96);
   risoBlack = color(5, 0, 5);
   fluoOrange = color(255, 116, 119);
   fluoGreen = color(68, 214, 44);
@@ -75,6 +76,7 @@ function setup() {
   teal = color(0, 131, 138);
   aqua = color(94, 200, 229);
   purple = color(118, 91, 167);
+  gold = color(172, 147, 110);
   none = color(255, 255, 255);
 
   colors = [
@@ -91,6 +93,7 @@ function setup() {
     teal,
     aqua,
     purple,
+    gold,
     none,
   ];
 
@@ -99,7 +102,7 @@ function setup() {
     "pink",
     "green",
     "blue",
-    "red",
+    "brightRed",
     "black",
     "fluoOrange",
     "fluoGreen",
@@ -108,6 +111,7 @@ function setup() {
     "teal",
     "aqua",
     "purple",
+    "metallicGold",
     "blank",
   ];
 
@@ -311,7 +315,7 @@ function changeRed() {
   document.querySelectorAll(
     ".nice-select.special-select.red"
   )[0].childNodes[1].style.color = colors[val];
-  if (val == 5 || val == 13) {
+  if (val == 5 || val == 14) {
     document.querySelectorAll(
       ".nice-select.special-select.red"
     )[0].childNodes[1].style.color = "white";
@@ -327,7 +331,7 @@ function changeGreen() {
   document.querySelectorAll(
     ".nice-select.special-select.green"
   )[0].childNodes[1].style.color = colors[val];
-  if (val == 5 || val == 13) {
+  if (val == 5 || val == 14) {
     document.querySelectorAll(
       ".nice-select.special-select.green"
     )[0].childNodes[1].style.color = "white";
@@ -343,7 +347,7 @@ function changeBlue() {
   document.querySelectorAll(
     ".nice-select.special-select.blue"
   )[0].childNodes[1].style.color = colors[val];
-  if (val == 5 || val == 13) {
+  if (val == 5 || val == 14) {
     document.querySelectorAll(
       ".nice-select.special-select.blue"
     )[0].childNodes[1].style.color = "white";
